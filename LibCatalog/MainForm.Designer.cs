@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DataGridViewBooks = new System.Windows.Forms.DataGridView();
             this.SearchGroupBox = new System.Windows.Forms.GroupBox();
             this.SearchTextBox = new System.Windows.Forms.TextBox();
@@ -39,9 +40,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.NameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextMenuStripForGrid = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.EditBookMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.RemoveBookMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.DataGridViewBooks)).BeginInit();
             this.SearchGroupBox.SuspendLayout();
             this.AddGroupBox.SuspendLayout();
+            this.contextMenuStripForGrid.SuspendLayout();
             this.SuspendLayout();
             // 
             // DataGridViewBooks
@@ -96,6 +101,7 @@
             this.AddButton.TabIndex = 6;
             this.AddButton.Text = "Добавить";
             this.AddButton.UseVisualStyleBackColor = true;
+            this.AddButton.Click += new System.EventHandler(this.AddButton_Click);
             // 
             // DatePublishedDateTimePicker
             // 
@@ -147,6 +153,27 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Название:";
             // 
+            // contextMenuStripForGrid
+            // 
+            this.contextMenuStripForGrid.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenuStripForGrid.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.EditBookMenuItem,
+            this.RemoveBookMenuItem});
+            this.contextMenuStripForGrid.Name = "contextMenuStripForGrid";
+            this.contextMenuStripForGrid.Size = new System.Drawing.Size(309, 80);
+            // 
+            // EditBookMenuItem
+            // 
+            this.EditBookMenuItem.Name = "EditBookMenuItem";
+            this.EditBookMenuItem.Size = new System.Drawing.Size(308, 24);
+            this.EditBookMenuItem.Text = "Редактировать выбранную книгу";
+            // 
+            // RemoveBookMenuItem
+            // 
+            this.RemoveBookMenuItem.Name = "RemoveBookMenuItem";
+            this.RemoveBookMenuItem.Size = new System.Drawing.Size(308, 24);
+            this.RemoveBookMenuItem.Text = "Удалить выбранную книгу";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
@@ -165,6 +192,7 @@
             this.SearchGroupBox.PerformLayout();
             this.AddGroupBox.ResumeLayout(false);
             this.AddGroupBox.PerformLayout();
+            this.contextMenuStripForGrid.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -182,6 +210,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox NameTextBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripForGrid;
+        private System.Windows.Forms.ToolStripMenuItem EditBookMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem RemoveBookMenuItem;
     }
 }
 

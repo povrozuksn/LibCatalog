@@ -30,6 +30,8 @@ namespace LibCatalog
             books.Add(new Book("Руслан и Людмила", "Пушкин Александр Сергеевич", DateTime.Parse("1820-01-01")));
             books.Add(new Book("Мёртвые души", "Гоголь Николай Васильевич", DateTime.Parse("1842-01-01")));
             books.Add(new Book("Шинель", "Гоголь Николай Васильевич", DateTime.Parse("1842-01-01")));
+            books.Add(new Book("Му-Му", "Тургенев Иван Сергеевич", DateTime.Parse("1854-01-01")));
+            books.Add(new Book("Ревизор", "Гоголь Николай Васильевич", DateTime.Parse("1835-01-01")));
         }
 
         private List<Book> FilteredBooks()
@@ -84,6 +86,22 @@ namespace LibCatalog
         {
             InitBookData();
             FillDataGridView();
+        }
+
+        private void AddButton_Click(object sender, EventArgs e)
+        {
+            DateTime selectedDate = DatePublishedDateTimePicker.Value;
+            DateTime date = DateTime.Parse(selectedDate.ToString("dd.MM.yyyy"));
+
+            Book newBook = new Book(NameTextBox.Text, AuthorTextBox.Text, date);
+            books.Add(newBook);
+            FillDataGridView();
+
+            NameTextBox.Text = "";
+            AuthorTextBox.Text = "";
+            DatePublishedDateTimePicker.Value = DateTime.Now;
+
+            NameTextBox.Focus();
         }
     }
 }
