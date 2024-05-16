@@ -103,6 +103,7 @@
             this.OkButton.TabIndex = 6;
             this.OkButton.Text = "Ok";
             this.OkButton.UseVisualStyleBackColor = true;
+            this.OkButton.Click += new System.EventHandler(this.OkButton_Click);
             // 
             // CancelButton
             // 
@@ -113,6 +114,7 @@
             this.CancelButton.TabIndex = 7;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // bookBindingSource
             // 
@@ -123,7 +125,6 @@
             this.AcceptButton = this.OkButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.CancelButton;
             this.ClientSize = new System.Drawing.Size(370, 366);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.OkButton);
@@ -137,6 +138,7 @@
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "EditBookForm";
             this.Text = "Редактирование книги";
+            this.Load += new System.EventHandler(this.EditBookForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.bookBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -13,6 +13,7 @@ namespace LibCatalog
     public partial class MainForm : Form
     {
         private List<Book> books = new List<Book>();
+        private bool cancelContextMenu = false;
         public MainForm()
         {
             InitializeComponent();
@@ -102,6 +103,78 @@ namespace LibCatalog
             DatePublishedDateTimePicker.Value = DateTime.Now;
 
             NameTextBox.Focus();
+        }
+
+        private void DataGridViewBooks_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            int row = e.RowIndex;
+            int col = e.ColumnIndex;
+
+            DataGridViewCell cell = DataGridViewBooks[col, row];
+
+            object cellValue = cell.Value;
+
+            Book book = books[row];
+
+            switch (col)
+            {
+                case 0:
+                    book.Name = (string)cellValue;
+                    break;
+                case 1:
+                    book.Author = (string)cellValue;
+                    break;
+                case 2:
+                    book.DatePublished = (DateTime)cellValue;
+                    break;
+            }
+        }
+
+        private void DataGridViewBooks_MouseDown(object sender, MouseEventArgs e)
+        {
+            if(e.Button == MouseButtons.Right)
+            {
+                var hitTextInfo = DataGridViewBooks.HitTest(e.X, e.Y);
+                if(hitTextInfo.RowIndex >= 0 && hitTextInfo.ColumnIndex >= 0)
+                {
+                    DataGridViewBooks.ClearSelection();
+                    DataGridViewBooks.Rows[hitTextInfo.RowIndex].Selected = true;
+                    cancelContextMenu = false;
+                }
+                else
+                {
+                    cancelContextMenu = true;
+                }
+            }
+        }
+
+        private void contextMenuStripForGrid_Opening(object sender, CancelEventArgs e)
+        {
+            if(cancelContextMenu)
+            {
+                e.Cancel = true;
+            }
+        }
+
+        private void EditBookMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection selectedRows = DataGridViewBooks.SelectedRows;
+
+            foreach(DataGridViewRow selectedRow in selectedRows)
+            {
+                int rowIndex = selectedRow.Index;
+
+                Book book = books[rowIndex];
+                EditBookForm editForm = new EditBookForm();
+                editForm.EditedBook = book;
+                editForm.BookUpdateEvent += editForm_BookUpdateEvent;
+                editForm.ShowDialog();
+            }
+        }
+
+        private void editForm_BookUpdateEvent(Book updatedBook)
+        {
+            FillDataGridView();
         }
     }
 }

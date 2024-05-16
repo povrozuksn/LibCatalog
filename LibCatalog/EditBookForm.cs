@@ -12,9 +12,33 @@ namespace LibCatalog
 {
     public partial class EditBookForm : Form
     {
+        public delegate void DelegateUpdateBook(Book updatedBook);
+        public event DelegateUpdateBook BookUpdateEvent;
+        public Book EditedBook { get; set; }
+
         public EditBookForm()
         {
             InitializeComponent();
+        }
+
+        private void EditBookForm_Load(object sender, EventArgs e)
+        {
+            bookBindingSource.Add(EditedBook);
+        }
+
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void OkButton_Click(object sender, EventArgs e)
+        {
+            Book bookUpdated = (Book)bookBindingSource.Current;
+            if (BookUpdateEvent != null)
+            {
+                BookUpdateEvent(bookUpdated);
+            }
+            Close();
         }
     }
 }

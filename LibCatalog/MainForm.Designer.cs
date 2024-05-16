@@ -52,12 +52,15 @@
             // DataGridViewBooks
             // 
             this.DataGridViewBooks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DataGridViewBooks.ContextMenuStrip = this.contextMenuStripForGrid;
             this.DataGridViewBooks.Location = new System.Drawing.Point(8, 77);
             this.DataGridViewBooks.Name = "DataGridViewBooks";
             this.DataGridViewBooks.RowHeadersWidth = 51;
             this.DataGridViewBooks.RowTemplate.Height = 24;
             this.DataGridViewBooks.Size = new System.Drawing.Size(752, 374);
             this.DataGridViewBooks.TabIndex = 0;
+            this.DataGridViewBooks.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.DataGridViewBooks_CellEndEdit);
+            this.DataGridViewBooks.MouseDown += new System.Windows.Forms.MouseEventHandler(this.DataGridViewBooks_MouseDown);
             // 
             // SearchGroupBox
             // 
@@ -161,12 +164,14 @@
             this.RemoveBookMenuItem});
             this.contextMenuStripForGrid.Name = "contextMenuStripForGrid";
             this.contextMenuStripForGrid.Size = new System.Drawing.Size(309, 80);
+            this.contextMenuStripForGrid.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripForGrid_Opening);
             // 
             // EditBookMenuItem
             // 
             this.EditBookMenuItem.Name = "EditBookMenuItem";
             this.EditBookMenuItem.Size = new System.Drawing.Size(308, 24);
             this.EditBookMenuItem.Text = "Редактировать выбранную книгу";
+            this.EditBookMenuItem.Click += new System.EventHandler(this.EditBookMenuItem_Click);
             // 
             // RemoveBookMenuItem
             // 
