@@ -176,5 +176,28 @@ namespace LibCatalog
         {
             FillDataGridView();
         }
+
+        private void RemoveBookMenuItem_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection selectedRows = DataGridViewBooks.SelectedRows;
+            foreach (DataGridViewRow selectedRow in selectedRows)
+            {
+                int rowIndex = selectedRow.Index;
+
+                Book book = books[rowIndex];
+
+                DialogResult result = MessageBox.Show("Удалить выбранную книгу?\r\n\r\nАвтор: " + book.Author + 
+                                                        "\r\nНазвание: " + book.Name + 
+                                                        "\r\nГод публикации: " + book.YearPublished, "Подтвердите",
+                                                        MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+
+                if(result == DialogResult.Yes)
+                {
+                    books.RemoveAt(rowIndex);
+                }
+
+                FillDataGridView();
+            }
+        }
     }
 }
